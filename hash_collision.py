@@ -13,7 +13,7 @@ def hash_collision(k):
 #     x = b'\x00'
 #     y = b'\x00'
     c = 0
-    while (c < k): 
+    while (c != k): 
         x = hashlib.sha256(os.urandom(16))
         y = hashlib.sha256(os.urandom(16))
         x_bits = ''
