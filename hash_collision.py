@@ -13,12 +13,15 @@ def hash_collision(k):
 #     x = b'\x00'
 #     y = b'\x00'
     c = 0
-    k = 5
     while (c < k): 
         x = hashlib.sha256(os.urandom(16))
         y = hashlib.sha256(os.urandom(16))
-        x_bits = x.hexdigest()
-        y_bits = y.hexdigest()
+        x_bits = ''
+        y_bits = ''
+        for i in range(len(x.digest())):
+            x_bits += bin(x.digest()[i])[2:].zfill(8)
+        for i in range(len(y.digest())):
+            y_bits += bin(y.digest()[i])[2:].zfill(8)
         length = min(len(x_bits), len(y_bits))
         j = -1
         c = 0
@@ -27,10 +30,10 @@ def hash_collision(k):
                 c += 1
                 j -= 1
             else: 
-    #                 print(c)
+#                 print(c)
                 break
-
+            
     # print(c)
     # print(x_bits)
     # print(y_bits)
-    return( x.digest(), y.digest() )
+    return( x, y )
