@@ -36,4 +36,4 @@ def hash_collision(k):
     # print(c)
     # print(x_bits)
     # print(y_bits)
-    return( x, y )
+    return( x.digest(), y.digest() )
