@@ -22,8 +22,10 @@ def hash_collision(k):
         #     x_bits += bin(x.digest()[i])[2:].zfill(8)
         # for i in range(len(y.digest())):
         #     y_bits += bin(y.digest()[i])[2:].zfill(8)
-        x_bits = ''.join(format(ord(i), '08b') for i in x.hexdigest())
-        y_bits = ''.join(format(ord(i), '08b') for i in y.hexdigest())
+        # x_bits = ''.join(format(ord(i), '08b') for i in x.hexdigest())
+        # y_bits = ''.join(format(ord(i), '08b') for i in y.hexdigest())
+        x_bits = bin(int(x.hexdigest(), 16))
+        y_bits = bin(int(y.hexdigest(), 16))
         length = min(len(x_bits), len(y_bits))
         j = -1
         c = 0
