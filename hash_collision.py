@@ -14,18 +14,20 @@ def hash_collision(k):
 #     y = b'\x00'
     c = 0
     while (c != k): 
-        x = hashlib.sha256(os.urandom(16))
-        y = hashlib.sha256(os.urandom(16))
-        # x_bits = ''
-        # y_bits = ''
-        # for i in range(len(x.digest())):
-        #     x_bits += bin(x.digest()[i])[2:].zfill(8)
-        # for i in range(len(y.digest())):
-        #     y_bits += bin(y.digest()[i])[2:].zfill(8)
-        # x_bits = ''.join(format(ord(i), '08b') for i in x.hexdigest())
-        # y_bits = ''.join(format(ord(i), '08b') for i in y.hexdigest())
-        x_bits = bin(int(x.hexdigest(), 16))
-        y_bits = bin(int(y.hexdigest(), 16))
+        x = os.urandom(16)
+        x_hash = hashlib.sha256(x)
+        y = os.urandom(16)
+        y_hash = hashlib.sha256(y)
+#         x_bits = ''.join(format(ord(i), '08b') for i in x.hexdigest())
+#         y_bits = ''.join(format(ord(i), '08b') for i in y.hexdigest())
+        x_bits = bin(int(x_hash.hexdigest(), 16))
+        y_bits = bin(int(y_hash.hexdigest(), 16))
+#         x_bits = ''
+#         y_bits = ''
+#         for i in range(len(x.digest())):
+#             x_bits += bin(x.digest()[i])[2:].zfill(8)
+#         for i in range(len(y.digest())):
+#             y_bits += bin(y.digest()[i])[2:].zfill(8)
         length = min(len(x_bits), len(y_bits))
         j = -1
         c = 0
@@ -36,8 +38,7 @@ def hash_collision(k):
             else: 
 #                 print(c)
                 break
-            
     # print(c)
     # print(x_bits)
     # print(y_bits)
-    return( x.digest(), y.digest() )
+    return( x, y )
