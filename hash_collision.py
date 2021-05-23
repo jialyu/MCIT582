@@ -1,3 +1,6 @@
+import hashlib
+import os
+
 def hash_collision(k):
     if not isinstance(k,int):
         print( "hash_collision expects an integer" )
@@ -23,13 +26,14 @@ def hash_collision(k):
         j = -1
         c = 0
         while (j>=-length): 
-            c += 1
-            j -= 1
             if (x_bits[j] == y_bits[j]): 
                 c += 1
+                j -= 1
             else: 
                 # print(c)
                 break
-#     print(x_bits)
-#     print(y_bits)
+            
+    # print(c)
+    # print(x_bits)
+    # print(y_bits)
     return( x.digest(), y.digest() )
