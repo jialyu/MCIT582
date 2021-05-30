@@ -10,7 +10,7 @@ def sign(m):
     G = secp256k1.G
     n = secp256k1.q
     d = random.randint(1, secp256k1.q)
-	private_key, public_key = gen_keypair(curve=secp256k1)
+	private_key, public_key = gen_keypair(secp256k1)
 
 	#generate signature
 	#Your code here
