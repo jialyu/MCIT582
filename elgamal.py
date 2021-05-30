@@ -12,7 +12,7 @@ def encrypt(pk,m):
     q = (p-1)/2
     r = random.randint(1, q)
     c1 = (g^r) % p
-    c2 = (pk^r) % m
+    c2 = ((pk^r)*m) % p
     return [c1,c2]
 
 def decrypt(sk,c):
