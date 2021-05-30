@@ -9,14 +9,13 @@ def sign(m):
 	#Your code here
     G = secp256k1.G
     n = secp256k1.q
-    d = random.randint(1, secp256k1.q)
 	private_key, public_key = gen_keypair(secp256k1)
 
 	#generate signature
 	#Your code here
 	r = pow(secp256k1.gx, 1, n)
     z = sha256(m)
-    ss = pow(k, -1)*(z+r*d)
+    ss = pow(k, -1)*(z+r*private_key)
 	s = pow(ss, 1, n)
 
 	assert isinstance( public_key, point.Point )
