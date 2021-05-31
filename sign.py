@@ -16,7 +16,8 @@ def sign(m):
     #generate signature
     #Your code here
     r = pow(secp256k1.gx, 1, n)
-    z = int(sha256(m).hexdigest(), 16)
+
+    z = int(sha256(m.encode('utf8')).hexdigest(), 16)
     k = random.randint(1, n)
 #   ss = pow(k, -1)*(z+r*private_key)
     # s = pow(ss, 1, n)
