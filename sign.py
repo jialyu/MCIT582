@@ -18,10 +18,10 @@ def sign(m):
     r = pow(secp256k1.gx, 1, n)
 
     z = int(sha256(m.encode('utf8')).hexdigest(), 16)
-    k = random.randint(1, n)
+    # k = random.randint(1, n)
 #   ss = pow(k, -1)*(z+r*private_key)
     # s = pow(ss, 1, n)
-    s = pow(pow(k, -1, n)*(pow(z, 1, n) + pow(pow(r,1,n)*pow(private_key,1,n), 1, n)),1,n)
+    s = pow(z, 1, n) + pow(pow(r,1,n)*pow(private_key,1,n),1,n)
     
     assert isinstance( public_key, point.Point )
     assert isinstance( r, int )
