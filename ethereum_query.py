@@ -45,9 +45,9 @@ def get_most_expensive_transaction(block_num):
     max_tx = HexBytes('0xf7f4905225c0fde293e2fd3476e97a9c878649dd96eb02c86b86be5b92d826b6')  #YOUR CODE HERE
     max_cost = 0
     for i in range(block_count): 
-        tx = w3.eth.get_transaction_by_block(block_num, i)
-        tx_cost = tx.value
+        tx = w3.eth.get_transaction_by_block(block_num, i).hash
+        tx_cost = get_gas_price(tx)
         if tx_cost > max_cost: 
             max_cost = tx_cost
-            max_tx = tx.hash
+            max_tx = tx
     return max_tx
