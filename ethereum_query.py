@@ -28,15 +28,15 @@ def get_gas(tx):
     return gas
 
 def get_transaction_cost(tx):
-    gas = get_gas(tx)
-    tx_cost = get_gas_price(tx) * gas.gasUsed #YOUR CODE HERE
+    tx_cost = get_gas_price(tx) * get_gas(tx) #YOUR CODE HERE
     return tx_cost
 
 def get_block_cost(block_num):
     block_count = w3.eth.getBlockTransactionCount(block_num)
     block_cost = 0
     for i in range(block_count):
-        block_cost += w3.eth.get_transaction_by_block(block_num, i).value  #YOUR CODE HERE
+        tx = w3.eth.get_transaction_by_block(block_num, i).hash
+        block_cost += get_transaction_cost(tx)  #YOUR CODE HERE
     return block_cost
 
 # Return the hash of the most expensive transaction
