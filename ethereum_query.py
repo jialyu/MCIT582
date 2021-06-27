@@ -19,14 +19,17 @@ def get_transaction(tx):
 # Return the gas price used by a particular transaction,
 #   tx is the transaction
 def get_gas_price(tx):
+    tx = get_transaction(tx)
     gas_price =  tx.gas_price #YOUR CODE HERE
     return gas_price
 
 def get_gas(tx):
+    tx = get_transaction(tx)
     gas = tx.gas #YOUR CODE HERE
     return gas
 
 def get_transaction_cost(tx):
+    tx = get_transaction(tx)
     tx_cost = tx.value #YOUR CODE HERE
     return tx_cost
 
