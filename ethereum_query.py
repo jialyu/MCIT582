@@ -23,14 +23,13 @@ def get_gas_price(tx):
     gas_price =  tx.gasPrice #YOUR CODE HERE
     return gas_price
 
-def get_gas(tx):
-    tx = get_transaction(tx)
-    gas = tx.gas #YOUR CODE HERE
+def get_gas(tx): 
+    gas = w3.eth.get_transaction_receipt(tx) #YOUR CODE HERE
     return gas
 
 def get_transaction_cost(tx):
-    tx = get_transaction(tx)
-    tx_cost = tx.value #YOUR CODE HERE
+    gas = get_gas(tx)
+    tx_cost = get_gas_price(tx) * gas.gasUsed #YOUR CODE HERE
     return tx_cost
 
 def get_block_cost(block_num):
