@@ -35,7 +35,7 @@ def send_tokens( receiver_pk, tx_amount ):
                              gh=gen_hash, receiver=receiver_pk, amt=tx_amount)
     SignedTxn = txn.sign(private_key)
     tx_id = acl.send_transaction(txn=SignedTxn)
-    sender_pk = private_key
+    sender_pk = address
 
     return sender_pk, tx_id
 
