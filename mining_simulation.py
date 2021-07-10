@@ -40,6 +40,7 @@ def Simulate(alpha,gamma,N, seed):
                 state=2
             else:
                 #Write a piece of code to change the required variables.
+#                 ChainLength-=1
                 state=-1
 
         elif state==-1:
@@ -51,11 +52,14 @@ def Simulate(alpha,gamma,N, seed):
                 state=0
                 SelfishRevenue+=2
             elif r<=alpha+(1-alpha)*gamma:
-#                 ChainLength-=1
+#                 ChainLength+=1
                 state=0
+#                 SelfishRevenue-=1
             else:
                 ChainLength+=1
                 state=0
+#                 SelfishRevenue+=1
+                
             
         elif state==2:
             #The selfish pool has 2 hidden block.
