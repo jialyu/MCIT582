@@ -49,20 +49,19 @@ def Simulate(alpha,gamma,N, seed):
             if r<=alpha:
                 ChainLength-=1
                 state=0
-                SelfishRevenue+=2
+#                 SelfishRevenue+=2
             elif r<=alpha+(1-alpha)*gamma:
-                ChainLength-=1
+#                 ChainLength-=1
                 state=0
             else:
-                ChainLength-=1
+                ChainLength+=1
                 state=0
             
-
         elif state==2:
             #The selfish pool has 2 hidden block.
             if r<=alpha:
                 state=3
-                SelfishRevenue+=1
+                SelfishRevenue+=2
 
             else:
                 #The honest miners found a block.
@@ -81,6 +80,7 @@ def Simulate(alpha,gamma,N, seed):
                 state-=1
 
     return float(SelfishRevenue)/ChainLength
+
 
 
 """ 
