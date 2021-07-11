@@ -13,7 +13,7 @@ def verify():
     content = request.get_json(silent=True)
     result = True
     
-    if content['payload']['message']=='Ethereum': 
+    if content['payload']['platform']=='Ethereum': 
         eth_account.Account.enable_unaudited_hdwallet_features()
         acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
@@ -30,7 +30,7 @@ def verify():
         else: 
             result = False
     
-    if content['payload']['message']=='Algorand':
+    if content['payload']['platform']=='Algorand':
         algo_sk, algo_pk = algosdk.account.generate_account()
         algo_sig_str = algosdk.util.sign_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sk)
 
