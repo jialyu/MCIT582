@@ -21,7 +21,7 @@ def verify():
         eth_sk = acct.key
 
         eth_encoded_msg = eth_account.messages.encode_defunct(text=json.dumps(content['payload']))
-        eth_sig_obj = eth_account.Account.sign_message(eth_encoded_msg,eth_sk)
+        eth_sig_obj = eth_account.Account.sign_message(eth_encoded_msg,content['sig'])
 
 
         #Check if signature is valid
