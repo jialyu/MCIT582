@@ -25,7 +25,7 @@ def verify():
 
 
         #Check if signature is valid
-        if eth_account.Account.recover_message(eth_encoded_msg,signature=eth_sig_obj.signature.hex()) == eth_pk: 
+        if eth_account.Account.recover_message(eth_encoded_msg,signature=eth_sig_obj.signature.hex()) == content['payload']['pk']: 
             result = True #Should only be true if signature validates
         else: 
             result = False
@@ -34,7 +34,7 @@ def verify():
         algo_sk, algo_pk = algosdk.account.generate_account()
         algo_sig_str = algosdk.util.sign_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sk)
 
-        if algosdk.util.verify_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sig_str,algo_pk):
+        if algosdk.util.verify_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sig_str,content['payload']['pk']):
             result = True
         else: 
             result = False
