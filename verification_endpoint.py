@@ -20,7 +20,7 @@ def verify():
         eth_pk = acct.address
         eth_sk = acct.key
 
-        eth_encoded_msg = eth_account.messages.encode_defunct(text=content['payload']['message'])
+        eth_encoded_msg = eth_account.messages.encode_defunct(text=json.dumps(content['payload']))
         eth_sig_obj = eth_account.Account.sign_message(eth_encoded_msg,eth_sk)
 
 
@@ -32,9 +32,9 @@ def verify():
     
     if content['payload']['message']=='Algorand':
         algo_sk, algo_pk = algosdk.account.generate_account()
-        algo_sig_str = algosdk.util.sign_bytes(content['payload']['message'].encode('utf-8'),algo_sk)
+        algo_sig_str = algosdk.util.sign_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sk)
 
-        if algosdk.util.verify_bytes(payload.encode('utf-8'),algo_sig_str,algo_pk):
+        if algosdk.util.verify_bytes(json.dumps(content['payload']).encode('utf-8'),algo_sig_str,algo_pk):
             result = True
         else: 
             result = False
