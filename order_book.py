@@ -27,8 +27,8 @@ def process_order(order):
                         if len(order.counterparty)==0: 
                             order.filled = datetime.now()
                             new_order.filled = datetime.now()
-                            order.counterparty = new_order
-                            new_order.counterparty = order
+#                             order.counterparty = new_order
+#                             new_order.counterparty = order
                             order.counterparty_id = new_order.id
                             new_order.counterparty_id = order.id
                             if order.sell_amount < order.buy_amount: 
@@ -55,5 +55,5 @@ def process_order(order):
                                 session.add(new)
                                 session.commit()
                                 break
-        order.counterparty = order
+#         order.counterparty = order
         order.counterparty_id = 0
