@@ -10,6 +10,7 @@ session = DBSession()
 
 def process_order(order):
     #Your code here
+#     insert_order(order)
     new_order = Order( sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
     fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount']
     new_order = Order(**{f:order[f] for f in fields})
@@ -31,7 +32,16 @@ def process_order(order):
 #                             new_order.counterparty = order
                             order.counterparty_id = new_order.id
                             new_order.counterparty_id = order.id
-                            if order.sell_amount < order.buy_amount: 
+                            if new_order.sell_amount < new_order.buy_amount: 
+#                                 new = {}
+#                                 new['sender_pk'] = new_order.sender_pk
+#                                 new['receiver_pk'] = new_order.receiver_pk
+#                                 new['buy_currency'] = new_order.buy_currency
+#                                 new['sell_currency'] = new_order.sell_currency
+#                                 new['buy_amount'] = new_order.buy_amount-new_order.sell_amount
+#                                 new['sell_amount'] = random.randint(1,10)
+#                                 new['creator_id'] = new_order.id
+#                                 insert_order(new)
                                 new = Order()
                                 new.sender_pk=order.sender_pk
                                 new.receiver_pk=order.receiver_pk
@@ -43,17 +53,3 @@ def process_order(order):
                                 session.add(new)
                                 session.commit()
                                 break
-                            if new_order.sell_amount < new_order.buy_amount: 
-                                new = Order()
-                                new.sender_pk=new_order.sender_pk
-                                new.receiver_pk=new_order.receiver_pk
-        #                         new.buy_currency=new_order.buy_currency
-        #                         new.sell_currency=new_order.sell_currency
-                                new.sell_amount=new_order.buy_amount-new_order.sell_amount
-                                new.buy_amount=0
-                                new.created_by = new_order.id
-                                session.add(new)
-                                session.commit()
-                                break
-#         order.counterparty = order
-        order.counterparty_id = 0
