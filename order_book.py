@@ -42,3 +42,4 @@ def process_order(order):
                                 new.created_by = order.id
                                 session.add(new)
                                 session.commit()
+                                break
