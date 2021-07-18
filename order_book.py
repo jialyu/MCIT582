@@ -37,7 +37,7 @@ def process_order(order):
                                 new.receiver_pk=order.receiver_pk
                                 new.buy_currency=order.buy_currency
                                 new.sell_currency=order.sell_currency
-                                new.sell_amount=(order.sell_amount/order.buy_amount)
+                                new.sell_amount=order.buy_amount-order.sell_amount
                                 new.buy_amount=0
                                 new.created_by = order.id
                                 session.add(new)
