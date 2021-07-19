@@ -43,7 +43,7 @@ def process_order(order):
                                 new.sell_amount=order.buy_amount-order.sell_amount
                                 new.buy_amount=0
                                 new.created_by = order.id
-                                order.child = [new]
+                                # order.child = [new]
                                 session.add(new)
                             session.commit()
                             break
