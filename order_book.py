@@ -35,16 +35,16 @@ def process_order(order):
                             order.counterparty_id = new_order.id
 #                             print('order.id:'+str(order.counterparty_id))
                             new_order.counterparty_id = order.id
-                            if new_order.sell_amount < new_order.buy_amount: 
+                            if order.sell_amount < order.buy_amount: 
                                 new = Order()
-                                new.sender_pk=order.sender_pk
-                                new.receiver_pk=order.receiver_pk
-                                new.buy_currency=order.buy_currency
-                                new.sell_currency=order.sell_currency
+                                new.sender_pk=new_order.sender_pk
+                                new.receiver_pk=new_order.receiver_pk
+                                new.buy_currency=new_order.buy_currency
+                                new.sell_currency=new_order.sell_currency
                                 new.buy_amount=random.randint(1,10)
-                                new.sell_amount=order.sell_amount*(new.buy_amount/order.buy_amount)
+                                new.sell_amount=new_order.sell_amount*(new.buy_amount/new_order.buy_amount)
 #                                 new.created_by = order.id
-                                new.creator_id = order.id
+                                new.creator_id = new_order.id
 #                                 order.child = [new]
                                 session.add(new)
 #                             if order.sell_amount < order.buy_amount: 
@@ -52,8 +52,8 @@ def process_order(order):
 #                                 new.sender_pk=new_order.sender_pk
 #                                 new.receiver_pk=new_order.receiver_pk
 #                                 new.buy_currency=new_order.buy_currency
-#                                 new.sell_currency=new_order.sell_currency
-#                                 new.sell_amount=new_order.buy_amount-new_order.sell_amount
+#                                 new.sell_currency=random.randint(1,10)
+#                                 new.sell_amount=new_order.sell_amount*(new.buy_amount/new_order.buy_amount)
 #                                 new.buy_amount=0
 # #                                 new.created_by = order.id
 #                                 new.creator_id = new_order.id
