@@ -41,9 +41,9 @@ def process_order(order):
                                 new.buy_currency=order.buy_currency
                                 new.sell_currency=order.sell_currency
                                 new.sell_amount=order.buy_amount-order.sell_amount
-                                new.buy_amount=0
+                                new.buy_amount=random.randint(1,10)
                                 new.created_by = order.id
-                                # order.child = [new]
+#                                 order.child = [new]
                                 session.add(new)
                             session.commit()
                             break
