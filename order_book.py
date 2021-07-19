@@ -45,7 +45,7 @@ def process_order(order):
                                 new.sell_amount=new_order.sell_amount*(new.buy_amount/new_order.buy_amount)
                                 new.created_by = new_order.id
                                 new.creator_id = new_order.id
-                                order.child = [new]
+                                # order.child = [new]
                                 session.add(new)
 #                             if order.sell_amount < order.buy_amount: 
 #                                 new = Order()
