@@ -25,12 +25,14 @@ def process_order(order):
             if (order.buy_currency == new_order.sell_currency) & (order.sell_currency == new_order.buy_currency): 
                 if (order.buy_amount>0) & (new_order.sell_amount>0): 
                     if (order.sell_amount / order.buy_amount >= new_order.buy_amount/new_order.sell_amount): 
-                        if len(order.counterparty)==0: 
+                        if order.counterparty_id==None: 
                             order.filled = datetime.now()
                             new_order.filled = datetime.now()
 #                             order.counterparty = new_order
 #                             new_order.counterparty = order
+                            print('new_order.id:'+str(new_order.id))
                             order.counterparty_id = new_order.id
+                            print('order.id:'+str(order.counterparty_id))
                             new_order.counterparty_id = order.id
                             if new_order.sell_amount < new_order.buy_amount: 
 #                                 new = {}
@@ -52,10 +54,5 @@ def process_order(order):
                                 new.created_by = order.id
 #                                 order.child = new.id
                                 session.add(new)
-                                session.commit()
-                                break
-#     orders = session.query(Order).filter(Order.filled != None).all() #Get all filled orders
-#     for order1 in orders:
-#         for order2 in orders: 
-#             if order1.creator_id == order2.id: 
-#                 order2.child = order1.id
+                            session.commit()
+                            break
