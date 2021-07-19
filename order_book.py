@@ -14,7 +14,6 @@ def process_order(order):
     new_order = Order( sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
     fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount']
     new_order = Order(**{f:order[f] for f in fields})
-#     new_order.counterparty_id = new_order.id
 
     session.add(new_order)
     session.commit()
@@ -26,7 +25,7 @@ def process_order(order):
             if (order.buy_currency == new_order.sell_currency) & (order.sell_currency == new_order.buy_currency): 
                 if (order.buy_amount>0) & (new_order.sell_amount>0): 
                     if (order.sell_amount / order.buy_amount >= new_order.buy_amount/new_order.sell_amount): 
-                        if order.counterparty_id==0: 
+                        if len(order.counterparty)==0: 
                             order.filled = datetime.now()
                             new_order.filled = datetime.now()
 #                             order.counterparty = new_order
@@ -51,20 +50,12 @@ def process_order(order):
                                 new.sell_amount=order.buy_amount-order.sell_amount
                                 new.buy_amount=0
                                 new.created_by = order.id
-                                order.child = new.id
+#                                 order.child = new.id
                                 session.add(new)
                                 session.commit()
                                 break
-    eth_out = 0
-    algo_out = 0
-
-    orders = session.query(Order).filter(Order.filled != None).all() #Get all filled orders
-    for order in orders:
-        if order.sell_currency == "Algorand":
-            eth_out += order.counterparty[0].buy_amount
-            if order.counterparty[0].child:
-                eth_out -= order.counterparty[0].child[0].buy_amount
-        if order.sell_currency == "Ethereum":
-            algo_out += order.counterparty[0].buy_amount
-            if order.counterparty[0].child:
-                algo_out -= order.counterparty[0].child[0].buy_amount
+#     orders = session.query(Order).filter(Order.filled != None).all() #Get all filled orders
+#     for order1 in orders:
+#         for order2 in orders: 
+#             if order1.creator_id == order2.id: 
+#                 order2.child = order1.id
