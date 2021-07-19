@@ -46,5 +46,17 @@ def process_order(order):
                                 new.creator_id = order.id
 #                                 order.child = [new]
                                 session.add(new)
+                            if order.sell_amount < order.buy_amount: 
+                                new = Order()
+                                new.sender_pk=new_order.sender_pk
+                                new.receiver_pk=new_order.receiver_pk
+                                new.buy_currency=new_order.buy_currency
+                                new.sell_currency=new_order.sell_currency
+                                new.sell_amount=new_order.buy_amount-new_order.sell_amount
+                                new.buy_amount=0
+#                                 new.created_by = order.id
+                                new.creator_id = new_order.id
+#                                 order.child = [new]
+                                session.add(new)
                             session.commit()
                             break
