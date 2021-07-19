@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+import random
 
 from models import Base, Order
 engine = create_engine('sqlite:///orders.db')
@@ -40,8 +41,8 @@ def process_order(order):
                                 new.receiver_pk=order.receiver_pk
                                 new.buy_currency=order.buy_currency
                                 new.sell_currency=order.sell_currency
-                                new.sell_amount=new_order.buy_amount-new_order.sell_amount
-                                new.buy_amount=0
+                                new.buy_amount=random.randint(1,10)
+                                new.sell_amount=(order.buy_amount/new.buy_amount)*order.sell_amount
 #                                 new.created_by = order.id
                                 new.creator_id = order.id
 #                                 order.child = [new]
