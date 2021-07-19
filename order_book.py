@@ -40,7 +40,7 @@ def process_order(order):
                                 new.receiver_pk=order.receiver_pk
                                 new.buy_currency=order.buy_currency
                                 new.sell_currency=order.sell_currency
-                                new.sell_amount=random.randint(1, (new_order.buy_amount-new_order.sell_amount))
+                                new.sell_amount=new_order.buy_amount-new_order.sell_amount
                                 new.buy_amount=0
                                 new.created_by = order.id
 #                                 order.child = [new]
