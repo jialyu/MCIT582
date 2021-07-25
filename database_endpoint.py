@@ -77,14 +77,13 @@ def trade():
             eth_encoded_msg = eth_account.messages.encode_defunct(text=json.dumps(content['payload']))
             eth_sig_obj = eth_account.Account.sign_message(eth_encoded_msg,eth_sk)
 
-
             #Check if signature is valid
             if eth_account.Account.recover_message(eth_encoded_msg,signature=content['sig']) == content['payload']['sender_pk']: 
                 result = True #Should only be true if signature validates
                 verified_order = Order( sender_pk=content['payload']['sender_pk'],receiver_pk=content['payload']['receiver_pk'], buy_currency=content['payload']['buy_currency'], sell_currency=content['payload']['sell_currency'], buy_amount=content['payload']['buy_amount'], sell_amount=content['payload']['sell_amount'], signature=content['sig'] )
                 fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
                 verified_order = Order(**{f:order[f] for f in fields})
-                g.session.add(new_order)
+                g.session.add(verified_order)
                 g.session.commit()
             else: 
                 result = False
@@ -99,12 +98,12 @@ def trade():
                 verified_order = Order( sender_pk=content['payload']['sender_pk'],receiver_pk=content['payload']['receiver_pk'], buy_currency=content['payload']['buy_currency'], sell_currency=content['payload']['sell_currency'], buy_amount=content['payload']['buy_amount'], sell_amount=content['payload']['sell_amount'], signature=content['sig'] )
                 fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
                 verified_order = Order(**{f:order[f] for f in fields})
-                g.session.add(new_order)
+                g.session.add(verified_order)
                 g.session.commit()
             else: 
                 result = False
                 log_message((json.dumps(content['payload'])))
-
+                
     return (jsonify(result))
         
 @app.route('/order_book')
