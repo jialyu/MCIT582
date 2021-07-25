@@ -109,7 +109,21 @@ def trade():
 def order_book():
     #Your code here
     #Note that you can access the database session using g.session
-    return jsonify(result)
+    existing_orders = session.query(Order).all()
+    orders_dict = {}
+    orders_list = []
+    for order in existing_orders: 
+        order_dict = {}
+        order_dict['sender_pk'] = order.sender_pk
+        order_dict['receiver_pk'] = order.receiver_pk
+        order_dict['buy_currency'] = order.buy_currency
+        order_dict['sell_currency'] = order.sell_currency
+        order_dict['buy_amount'] = order.buy_amount
+        order_dict['sell_amount'] = order.sell_amount
+        order_dict['signature'] = order.signature
+        orders_list.append(order_dict)
+    orders_dict['data'] = orders_list
+    return orders_dict
 
 if __name__ == '__main__':
     app.run(port='5002')
