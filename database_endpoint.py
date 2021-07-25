@@ -109,7 +109,7 @@ def trade():
 def order_book():
     #Your code here
     #Note that you can access the database session using g.session
-    existing_orders = session.query(Order).all()
+    existing_orders = g.session.query(Order).all()
     orders_dict = {}
     orders_list = []
     for order in existing_orders: 
