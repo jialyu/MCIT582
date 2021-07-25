@@ -104,6 +104,8 @@ def trade():
             else: 
                 result = False
                 log_message((json.dumps(content['payload'])))
+
+    return (jsonify(result))
         
 @app.route('/order_book')
 def order_book():
