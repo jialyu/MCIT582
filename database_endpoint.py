@@ -66,7 +66,7 @@ def trade():
             
         #Your code here
         #Note that you can access the database session using g.session
-#         result = True
+        result = True
         if content['payload']['platform']=='Ethereum': 
             eth_account.Account.enable_unaudited_hdwallet_features()
             acct, mnemonic = eth_account.Account.create_with_mnemonic()
