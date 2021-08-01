@@ -42,17 +42,15 @@ class TXO:
         n_output = tx['vout'][n]
         cls.tx_hash = tx['hash']
         cls.n = n
-        amount = 0
-        for v in tx['vout']: 
-            amount += v['value']
         cls.amount = amount
         cls.owner = tx['txid']
         cls.time = datetime.fromtimestamp(tx['time'])
-        cls.inputs = self.inputs
+        cls.inputs = []
         return cls
 
     def get_inputs(self,d=1):
         # pass
         #YOUR CODE HERE
+        # tx = rpc_connection.getrawtransaction(self.tx_hash,True)
         for i in range(d): 
-            self.inputs += self
+            self.inputs += TXO(self.tx_hash, self.n, self.amount, self.owner, self.time)
