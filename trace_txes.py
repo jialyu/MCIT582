@@ -42,8 +42,11 @@ class TXO:
         n_output = tx['vout'][n]
         cls.tx_hash = tx['hash']
         cls.n = n
-        cls.amount = amount
-        cls.owner = tx['txid']
+        # amount = 0
+        # for x in tx['vout']:
+        #     amount += x['value']
+        cls.amount = int(n_output['value'])
+        cls.owner = n_output['addresses'][0]
         cls.time = datetime.fromtimestamp(tx['time'])
         cls.inputs = []
         return cls
