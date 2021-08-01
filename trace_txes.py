@@ -56,4 +56,5 @@ class TXO:
         #YOUR CODE HERE
         # tx = rpc_connection.getrawtransaction(self.tx_hash,True)
         for i in range(d): 
-            self.inputs += TXO(self, self.tx_hash, self.n, self.amount, self.owner, self.time)
+            tx = TXO(self, self.tx_hash, self.n, self.amount, self.owner, self.time)
+            tx.inputs += tx
