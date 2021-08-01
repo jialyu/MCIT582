@@ -51,6 +51,7 @@ class TXO:
         return cls
 
     def get_inputs(self,d=1):
+        pass
         #YOUR CODE HERE
-        for i in range(d): 
-            self.inputs += self
+        # for i in range(d): 
+        #     self.inputs += self
