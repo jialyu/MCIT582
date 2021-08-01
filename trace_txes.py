@@ -48,10 +48,11 @@ class TXO:
         cls.amount = amount
         cls.owner = tx['txid']
         cls.time = datetime.fromtimestamp(tx['time'])
+        cls.inputs = self.inputs
         return cls
 
     def get_inputs(self,d=1):
-        pass
+        # pass
         #YOUR CODE HERE
-        # for i in range(d): 
-        #     self.inputs += self
+        for i in range(d): 
+            self.inputs += self
