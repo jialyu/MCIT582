@@ -45,7 +45,7 @@ class TXO:
         # amount = 0
         # for x in tx['vout']:
         #     amount += x['value']
-        cls.amount = int(n_output['value'])
+        cls.amount = int(str(n_output['value']).replace('.', ''))
         cls.owner = n_output['scriptPubKey']['addresses'][0]
         cls.time = datetime.fromtimestamp(tx['time'])
         cls.inputs = []
