@@ -39,9 +39,13 @@ def tradeTokens(sell_token: address, sell_quantity: uint256):
 	assert sell_token == self.tokenA.address or sell_token == self.tokenB.address
 	#Your code here
 	if sell_token == self.tokenA.address: 
-		self.tokenAQty = self.tokenAQty + sell_quantity
+		self.tokenA.transferFrom(msg.sender, self.tokenA.address, sell_quantity)
+		new_total_tokens: unit256 = self.tokenAQty + sell_quantity
+		self.tokenAQty = new_total_tokens
 	if sell_token == self.tokenB.address: 
-		self.tokenBQty = self.tokenBQty + sell_quantity
+		self.tokenB.transferFrom(msg.sender, self.tokenB.address, sell_quantity)
+		new_total_tokens: unit256 = self.tokenBQty + sell_quantity
+		self.tokenBQty = new_total_tokens
 	# self.invariant = self.tokenAQty * self.tokenBQty
 
 # Owner can withdraw their funds and destroy the market maker
