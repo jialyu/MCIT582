@@ -52,6 +52,6 @@ def ownerWithdraw():
 	self.tokenA.transfer(self.tokenA.address, self.tokenAQty)
 	# selfdestruct(self.tokenA.address)
 	self.tokenB.transfer(self.tokenB.address, self.tokenBQty)
-	selfdestruct(self.tokenB.address)
+	# selfdestruct(self.tokenB.address)
 	# self.owner.transfer(self.owner, self.tokenAQty+self.tokenBQty)
-	# selfdestruct(self.owner)
+	selfdestruct(self.owner)
