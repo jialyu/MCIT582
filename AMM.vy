@@ -45,7 +45,7 @@ def ownerWithdraw():
 	assert self.owner == msg.sender
 	#Your code here
 	self.tokenA.transfer(self.tokenA.address, self.tokenAQty)
-	selfdestruct(self.tokenA.address)
+	# selfdestruct(self.tokenA.address)
 	self.tokenB.transfer(self.tokenB.address, self.tokenBQty)
 	selfdestruct(self.tokenB.address)
 	# self.owner.transfer(self.owner, self.tokenAQty+self.tokenBQty)
