@@ -109,7 +109,7 @@ def fill_order(order,txes=[]):
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
     # Hint: use json.dumps or str() to get it in a nice string form
-    g.session.add(Log(d))
+    g.session.add(d)
     g.session.commit()
 
 """ End of helper methods """
