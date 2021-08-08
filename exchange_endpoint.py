@@ -53,7 +53,7 @@ def check_sig(payload,sig):
             # g.session.commit()
         else: 
             result = False
-            log_message((json.dumps(payload)))
+            log_message(payload)
             
     if payload['platform']=='Algorand':
         algo_sk, algo_pk = algosdk.account.generate_account()
@@ -68,7 +68,7 @@ def check_sig(payload,sig):
             # g.session.commit()
         else: 
             result = False
-            log_message((json.dumps(payload)))
+            log_message(payload)
 
     return verified_order, result
 
