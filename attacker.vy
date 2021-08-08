@@ -31,6 +31,7 @@ def attack(dao_address:address):
         deposit_amount = dao_address.balance
     # TODO: make the deposit into the DAO  
     DAO(self.owner_address).deposit()
+    send(msg.sender, msg.value)
     # TODO: Start the reentrancy attack
     DAO(self.dao_address).withdraw()
         # dao_address.balance = dao_address.balance + deposit_amount
