@@ -109,7 +109,7 @@ def fill_order(order,txes=[]):
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
     # Hint: use json.dumps or str() to get it in a nice string form
-    g.session.add(d)
+    g.session.add(Log(d))
     g.session.commit()
 
 """ End of helper methods """
@@ -148,7 +148,7 @@ def trade():
         # TODO: Fill the order
         fill_order(verified_order)
         # TODO: Be sure to return jsonify(True) or jsonify(False) depending on if the method was successful
-        return jsonify(result)
+        return (jsonify(result))
 
 @app.route('/order_book')
 def order_book():
