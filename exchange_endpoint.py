@@ -168,7 +168,7 @@ def order_book():
         order_dict['signature'] = order.signature
         orders_list.append(order_dict)
     orders_dict['data'] = orders_list
-    return json.dumps(jsonify(orders_dict))
+    return jsonify(orders_dict)
 
 if __name__ == '__main__':
     app.run(port='5002')
