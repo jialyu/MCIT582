@@ -14,6 +14,6 @@ def deposit() -> bool:
 def withdraw() -> bool:
 
     # This is the vulnerability for reentrance
-    send(msg.msg.sender, self.userBalances(self.dao_address)) #This line may look complicated, but essentially its sending an amount of ETH equal to self.userBalances[msg.sender] to the address msg.sender
+    raw_call(msg.sender, b"\0", value=self.userBalances[msg.sender]) #This line may look complicated, but essentially its sending an amount of ETH equal to self.userBalances[msg.sender] to the address msg.sender
     self.userBalances[msg.sender] = 0
     return True
