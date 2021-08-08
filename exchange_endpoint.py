@@ -73,7 +73,38 @@ def check_sig(payload,sig):
     return verified_order, result
 
 def fill_order(order,txes=[]):
-    pass
+    new_order = Order( sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
+    fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount']
+    new_order = Order(**{f:order[f] for f in fields})
+
+    g.session.add(new_order)
+    g.session.commit()
+    
+    existing_orders = session.query(Order).all()
+    
+    for order in existing_orders: 
+        if (order.filled==None): 
+            if (order.buy_currency == new_order.sell_currency) & (order.sell_currency == new_order.buy_currency): 
+                if (order.buy_amount>0) & (new_order.sell_amount>0): 
+                    if (order.sell_amount / order.buy_amount >= new_order.buy_amount/new_order.sell_amount): 
+                        if order.counterparty_id==None: 
+                            order.filled = datetime.now()
+                            new_order.filled = datetime.now()
+                            order.counterparty_id = new_order.id
+                            new_order.counterparty_id = order.id
+                            if order.sell_amount < order.buy_amount: 
+                                new = Order()
+                                new.sender_pk=new_order.sender_pk
+                                new.receiver_pk=new_order.receiver_pk
+                                new.buy_currency=new_order.buy_currency
+                                new.sell_currency=new_order.sell_currency
+                                new.buy_amount=random.randint(1,10)
+                                new.sell_amount=new_order.sell_amount*(new.buy_amount/new_order.buy_amount)
+                                new.created_by = new_order.id
+                                new.creator_id = new_order.id
+                                g.session.add(new)
+                            g.session.commit()
+                            break
   
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
@@ -115,7 +146,7 @@ def trade():
         g.session.add(verified_order)
         g.session.commit()
         # TODO: Fill the order
-        
+        fill_order(verified_order)
         # TODO: Be sure to return jsonify(True) or jsonify(False) depending on if the method was successful
         return jsonify(result)
 
