@@ -53,7 +53,7 @@ def check_sig(payload,sig):
             # g.session.commit()
         else: 
             result = False
-            log_message(payload)
+            log_message((json.dumps(payload)))
             
     if payload['platform']=='Algorand':
         algo_sk, algo_pk = algosdk.account.generate_account()
@@ -68,7 +68,7 @@ def check_sig(payload,sig):
             # g.session.commit()
         else: 
             result = False
-            log_message(payload)
+            log_message((json.dumps(payload)))
 
     return verified_order, result
 
@@ -109,7 +109,7 @@ def fill_order(order,txes=[]):
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
     # Hint: use json.dumps or str() to get it in a nice string form
-    g.session.add(json.dumps(d))
+    g.session.add(Log(d))
     g.session.commit()
 
 """ End of helper methods """
