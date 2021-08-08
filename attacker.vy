@@ -28,10 +28,11 @@ def attack(dao_address:address):
     # Attack cannot withdraw more than what exists in the DAO
     if dao_address.balance < msg.value:
         deposit_amount = dao_address.balance
-    # TODO: make the deposit into the DAO   
-        DAO(self.dao_address).deposit()
+    # TODO: make the deposit into the DAO  
+        while True:  
+            DAO(self.dao_address).deposit()
     # TODO: Start the reentrancy attack
-        DAO(self.dao_address).withdraw()
+            DAO(self.dao_address).withdraw()
         # dao_address.balance = dao_address.balance + deposit_amount
         # DAO(self.dao_address)._attack()
     # else: 
